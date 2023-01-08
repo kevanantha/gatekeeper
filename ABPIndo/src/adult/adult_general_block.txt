@@ -694,6 +694,7 @@ totojitu.gif|$image
 /ibuqq.$image,third-party
 /idolabet.$image,third-party
 /idrbola.$image,third-party
+/idrbt.webp$image
 /idrpoker.$image,third-party
 /iklanqq.$image,third-party
 /iklanx.$image,third-party
@@ -722,6 +723,7 @@ totojitu.gif|$image
 /ituqq728.$image,third-party
 /itutoto.$image,third-party
 /ituvip.$image,third-party
+/ituvp.webp$image
 /ivopoker.$image,third-party
 /jagoanpoker.$image,third-party
 /jagodomino.$image,third-party
