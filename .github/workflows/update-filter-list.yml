@@ -1,0 +1,50 @@
+on:
+  workflow_dispatch:
+    schedule:
+      - cron: "0 0 * * SUN"
+
+jobs:
+  update-list:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Clone repository
+        uses: GuillaumeFalourd/clone-github-repo-action@v2
+        with:
+          owner: evilfactorylabs
+          repository: gatekeeper
+      - name: Set up git
+        run: |
+          echo ${{ github.actor }}
+          git config --global user.email "anakmagang@evilfactorylabs.com"
+          git config --global user.name "anakmagang"
+      - name: Run update script
+        run: |
+          ls -la
+          cd gatekeeper
+          pwd
+          bash update.sh
+          git log
+          # git add .
+          # git commit -m "chore: update filter list"
+          # git push origin gh-action-update-filter-list
+      - name: Commit and push changes
+        uses: GuillaumeFalourd/git-commit-push@v1.3
+        with:
+          email: ${{ github.actor }}@users.noreply.github.com
+          name: ${{ github.actor }}
+          commit_message: "chore: update filter list"
+          target_branch: gh-action-update-filter-list
+          files: .
+          remote_repository: https://github.com/evilfactorylabs/gatekeeper
+          access_token: ${{ github.token }}
+          force: true
+          empty: true
+          tags: true
+      # - name: Commit and push changes
+      #   uses: devops-infra/action-commit-push@master
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     commit_message: "chore: update filter list"
+      #     target_branch: gh-action-update-filter-list
