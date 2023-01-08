@@ -1,0 +1,20 @@
+on:
+  workflow_dispatch:
+    schedule:
+      - cron: "0 0 * * SUN"
+
+jobs:
+  update-list:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Run update script
+        run: |
+          bash update.sh
+      - name: Commit and push changes
+        uses: devops-infra/action-commit-push@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          commit_message: "chore: update filter list"
+          target_branh: main
